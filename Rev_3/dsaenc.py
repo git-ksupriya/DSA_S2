@@ -170,12 +170,14 @@ class LMS:
         title = input("Enter book title: ")
         author = input("Enter author name: ")
         isbn = input("Enter ISBN: ")
-        if "ook" in typ.lower():
+        if "ebook" in typ.lower():
             file_size = input("Enter file size: ")
             return EBook(title, author, isbn, file_size)
-        else:
+        elif "hardcopy" in typ.lower():
             pages = int(input("Enter number of pages: "))
             return HardCopy(title, author, isbn, pages)
+        else:
+            return Book(title, author, isbn)
 
     def student_borrow(self, user, book_title):  
         temp = self.books_list.head
