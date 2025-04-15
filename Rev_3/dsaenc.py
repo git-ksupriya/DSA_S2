@@ -98,10 +98,9 @@ class Librarian(Person):
 
 
 class Book:
-    def __init__(self, title, author, isbn):
+    def __init__(self, title, author):
         self.__title = title
         self.__author = author
-        self.__isbn = isbn
         self.__is_available = True
 
     def book_type(self):
@@ -119,13 +118,10 @@ class Book:
     def get_author(self):
         return self.__author
 
-    def get_isbn(self):
-        return self.__isbn
-
 
 class HardCopy(Book):
-    def __init__(self, title, author, isbn, pages):
-        super().__init__(title, author, isbn)
+    def __init__(self, title, author, pages):
+        super().__init__(title, author)
         self.pages = pages
 
     def book_type(self):
@@ -133,8 +129,8 @@ class HardCopy(Book):
 
 
 class EBook(Book):
-    def __init__(self, title, author, isbn, file_size):
-        super().__init__(title, author, isbn)
+    def __init__(self, title, author, file_size):
+        super().__init__(title, author)
         self.file_size = file_size
 
     def book_type(self):
@@ -169,15 +165,14 @@ class LMS:
     def make_book(self, typ):
         title = input("Enter book title: ")
         author = input("Enter author name: ")
-        isbn = input("Enter ISBN: ")
         if "ebook" in typ.lower():
             file_size = input("Enter file size: ")
-            return EBook(title, author, isbn, file_size)
+            return EBook(title, author, file_size)
         elif "hardcopy" in typ.lower():
             pages = int(input("Enter number of pages: "))
-            return HardCopy(title, author, isbn, pages)
+            return HardCopy(title, author, pages)
         else:
-            return Book(title, author, isbn)
+            return Book(title, author)
 
     def student_borrow(self, user, book_title):  
         temp = self.books_list.head
